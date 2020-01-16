@@ -10,7 +10,9 @@ def index():
         data = json.load(json_file)
 
     return jsonify(data), 200
-    return "HEllo"
+
+
+
 
 @app.route('/restaurants/search', methods=['GET'])
 def search():
@@ -20,7 +22,13 @@ def search():
     # Get restaurant data from jsonfile
     with open('data/restaurants.json') as json_file:
         data = json.load(json_file)
-    return jsonify(data), 200
+
+    restaurants = []
+
+    for r in data['restaurants']:
+        if tag in r['tags']:
+            restaurants.append(r)
+    return jsonify(restaurants), 200
 
 
 if __name__ == "__main__":
