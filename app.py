@@ -39,10 +39,15 @@ def search():
         data = json.load(json_file)
 
     restaurants = []
-
+    cordinates = (float(lat), float(lon))
     for r in data['restaurants']:
         if tag in r['tags']:
-            restaurants.append(r)
+            rest_cord = [float(i) for i in r['location']]
+            rest_cord.reverse()
+            dis = get_distance(cordinates, tuple(rest_cord))
+            print(r['name'], " is : ", dis, " km from you")
+            if dis < 3.0:
+                restaurants.append(r)
     return jsonify(restaurants), 200
 
 
