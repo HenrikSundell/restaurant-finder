@@ -1,10 +1,13 @@
-from flask import Flask
+from flask import Flask,jsonify
+import json
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return 'Deployed to heroku!!!'
+    with open('data/restaurants.json') as json_file:
+        data = json.load(json_file)
+    return jsonify(data), 200
 
 
 if __name__ == "__main__":
