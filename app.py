@@ -31,7 +31,7 @@ def get_distance(start, end):
 
 @app.route('/restaurants/search', methods=['GET'])
 def search():
-    tag = request.args.get('q')
+    q = request.args.get('q')
     lat = request.args.get('lat')
     lon = request.args.get('lon')
     # Get restaurant data from jsonfile
@@ -39,13 +39,13 @@ def search():
         data = json.load(json_file)
 
     restaurants = []
-    cordinates = (float(lat), float(lon))
+    postition = (float(lat), float(lon))
     for r in data['restaurants']:
-        if tag in r['tags']:
+        if q in r['tags'] or q in r['name'] or q in r['description']:
             rest_cord = [float(i) for i in r['location']]
             rest_cord.reverse()
-            dis = get_distance(cordinates, tuple(rest_cord))
-            print(r['name'], " is : ", dis, " km from you")
+            dis = get_distance(postition, tuple(rest_cord))
+
             if dis < 3.0:
                 restaurants.append(r)
     return jsonify(restaurants), 200
