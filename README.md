@@ -21,11 +21,11 @@ A querry string for the search e.g. q=pizza
 
 lat=[float]
 
-Latitude coordinate (customer's location) in decimal form e.g.lat=60.1704
+Latitude coordinate (customer's location) in decimal form e.g. lat=60.1704
 
 lon=[float]
 
-Longitude coordinate (customer's location) in decimal form e.g.lat=24.9322331121
+Longitude coordinate (customer's location) in decimal form e.g. lon=24.9322331121
 ### optional:
 
 max=[float]
