@@ -31,22 +31,36 @@ def get_distance(start, end):
 
 @app.route('/restaurants/search', methods=['GET'])
 def search():
-    q = request.args.get('q')
-    lat = request.args.get('lat')
-    lon = request.args.get('lon')
+    q = request.args.get('q', None)
+    lat = request.args.get('lat', None)
+    lon = request.args.get('lon', None)
+    # Check if required parameters are found
+    if not q or not lat or not lon:
+        return jsonify({"ERROR": "Bad Request"}), 400
+
+    # Optional URL parameters
+    max = request.args.get('max', 3.0) # Max distance instead of 3km
+    status = request.args.get('status', 1) # Equal to 0 if online status of restaurants should be ignored
     # Get restaurant data from jsonfile
     with open('data/restaurants.json') as json_file:
         data = json.load(json_file)
 
+    # Convert paramter types if possible
+    try:
+        postition = (float(lat), float(lon))
+        max = float(max)
+        status = int(status)
+    except ValueError:
+        return jsonify({"ERROR": "Bad Request"}), 400
+
     restaurants = []
-    postition = (float(lat), float(lon))
     for r in data['restaurants']:
         if q in r['tags'] or q in r['name'] or q in r['description']:
             rest_cord = [float(i) for i in r['location']]
             rest_cord.reverse()
             dis = get_distance(postition, tuple(rest_cord))
-
-            if dis < 3.0:
+            print(type(r['online']))
+            if dis < max and r['online'] or status == 0:
                 restaurants.append(r)
     return jsonify(restaurants), 200
 
