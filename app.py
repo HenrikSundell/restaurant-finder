@@ -40,7 +40,7 @@ def search():
     online = request.args.get('online', 0) # Equal to 1 if only online restaurants should be returned
     # Check if required parameters are found
     if not q or not lat or not lon:
-        return jsonify({"ERROR": "Bad Requeeest"}), 400
+        return jsonify({"ERROR": "Bad Request"}), 400
 
     # Convert paramter types if possible and Check if they are legal
     try:
@@ -63,7 +63,7 @@ def search():
             rest_cord.reverse()
             dis = get_distance(postition, tuple(rest_cord))
             # Only return the restaurants near by and only online ones if online parameter == 1
-            if dis < max and online == 0 or r['online']:
+            if dis < max and online == 0 or dis < max and r['online']:
                 restaurants.append(r)
     return jsonify(restaurants), 200
 
