@@ -34,24 +34,27 @@ def search():
     q = request.args.get('q', None)
     lat = request.args.get('lat', None)
     lon = request.args.get('lon', None)
-    # Check if required parameters are found
-    if not q or not lat or not lon:
-        return jsonify({"ERROR": "Bad Request"}), 400
 
     # Optional URL parameters
     max = request.args.get('max', 3.0) # Max distance instead of 3km
-    status = request.args.get('status', 1) # Equal to 0 if online status of restaurants should be ignored
-    # Get restaurant data from jsonfile
-    with open('data/restaurants.json') as json_file:
-        data = json.load(json_file)
+    online = request.args.get('online', 0) # Equal to 1 if only online restaurants should be returned
+    # Check if required parameters are found
+    if not q or not lat or not lon:
+        return jsonify({"ERROR": "Bad Requeeest"}), 400
 
-    # Convert paramter types if possible
+    # Convert paramter types if possible and Check if they are legal
     try:
         postition = (float(lat), float(lon))
         max = float(max)
-        status = int(status)
+        online = int(online)
+        if online < 0 or online > 1:
+            raise ValueError
     except ValueError:
         return jsonify({"ERROR": "Bad Request"}), 400
+
+    # Get restaurant data from jsonfile
+    with open('data/restaurants.json') as json_file:
+            data = json.load(json_file)
 
     restaurants = []
     for r in data['restaurants']:
@@ -59,8 +62,8 @@ def search():
             rest_cord = [float(i) for i in r['location']]
             rest_cord.reverse()
             dis = get_distance(postition, tuple(rest_cord))
-            print(type(r['online']))
-            if dis < max and r['online'] or status == 0:
+            # Only return the restaurants near by and only online ones if online parameter == 1
+            if dis < max and online == 0 or r['online']:
                 restaurants.append(r)
     return jsonify(restaurants), 200
 
