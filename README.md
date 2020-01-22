@@ -64,3 +64,6 @@ The current master branch is deployed using Heroku.
 
 ## A note on authorization
 To make reviewing easier there is no authorization needed to use this api.
+
+## Authors
+* **Henrik Sundell**
