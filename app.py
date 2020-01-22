@@ -4,6 +4,11 @@ from math import sin, cos, atan2, pow, sqrt, radians
 
 app = Flask(__name__)
 
+# Reuturn a json error message when 404
+@app.errorhandler(404)
+def page_not_found(e):
+    return jsonify({"ERROR": "Page Not Found"}), 404
+
 @app.route('/restaurants')
 def restaurants():
     # Get restaurant data from jsonfile
@@ -70,4 +75,4 @@ def search():
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=False)

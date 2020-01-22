@@ -17,7 +17,7 @@ You can run the tests found in _app_test.py_ with this command:
 
 ## or you can try it here
 
-### https://restaurant-finder-wolt.herokuapp.com/
+### https://restaurant-finder-wolt.herokuapp.com/restaurants
 
 ## URL Params
 
