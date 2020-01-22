@@ -50,6 +50,9 @@ only restaurants that are currently online are returned.
 ### `/restaurants/search?q=pizza&lat=60.17045&lon=24.93147&max=0.5`
 ### `/restaurants/search?q=pizza&lat=60.17045&lon=24.93147&max=0.5&online=1`
 
+or you can find all restaurants present in the database at:
+### `/restaurants`
+
 ## Try them here:
 ### https://restaurant-finder-wolt.herokuapp.com/restaurants/search?q=sushi&lat=60.17045&lon=24.93147
 ### https://restaurant-finder-wolt.herokuapp.com/restaurants/search?q=pizza&lat=60.17045&lon=24.93147&max=0.5
@@ -59,5 +62,5 @@ only restaurants that are currently online are returned.
 The current master branch is deployed using Heroku.
 ### https://restaurant-finder-wolt.herokuapp.com/
 
-### A note on authorization
+## A note on authorization
 To make reviewing easier there is no authorization needed to use this api.
