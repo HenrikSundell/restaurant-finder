@@ -1,12 +1,14 @@
 # restaurant-finder
 ## running the project
-To run this project you need to have python3 installed on your computer. If you don't have it installed
-you can find it at https://www.python.org/
+This project is written in Python 3, you should have it installed if you want to run this project.
+https://www.python.org/
 
 You can install all the packages needed with this command:
 ### `pip install -r requirements.txt`
 After the packages are installed you should be able to run the project with this command:
 ### `python app.py`
+
+You might have to use `pip3 install -r requirements.txt` and `python3 app.py` instead, depending on your system.
 
 ## or you can try it here
 
