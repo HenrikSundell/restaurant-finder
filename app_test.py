@@ -54,7 +54,7 @@ def test_optional_parameters():
     for r in data:
         assert r['online'] == True
 
-
+# Test if bad requests return correct error message instead of causing problems
 def test_bad_requests():
     response = app.test_client().get('/restaurants/search?q=sushi&lat=60.17045&lon=24.93x147')
     assert response.status_code == 400
