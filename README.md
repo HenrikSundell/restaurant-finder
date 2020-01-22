@@ -1,5 +1,5 @@
 # restaurant-finder
-## running the project
+## Running the project
 This project is written in Python 3, you should have it installed if you want to run this project.
 https://www.python.org/
 
