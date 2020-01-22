@@ -4,8 +4,8 @@ from math import sin, cos, atan2, pow, sqrt, radians
 
 app = Flask(__name__)
 
-@app.route('/')
-def index():
+@app.route('/restaurants')
+def restaurants():
     # Get restaurant data from jsonfile
     with open('data/restaurants.json') as json_file:
         data = json.load(json_file)
@@ -59,6 +59,7 @@ def search():
     restaurants = []
     for r in data['restaurants']:
         if q in r['tags'] or q in r['name'] or q in r['description']:
+            # Convert the restaurant cordinates to floats from strings
             rest_cord = [float(i) for i in r['location']]
             rest_cord.reverse()
             dis = get_distance(postition, tuple(rest_cord))
