@@ -17,9 +17,9 @@ def restaurants():
 
     return jsonify(data), 200
 
-#calculates distance between to cordinates
-#input two tuples with latitude and longitude of the cordinates
-#returns the distance between them in kilometers
+# Calculates distance between to cordinates
+# Input two tuples with latitude and longitude of the cordinates
+# Returns the distance between them in kilometers
 def get_distance(start, end):
     start_lat, start_lon = radians(start[0]), radians(start[-1])
     end_lat, end_lon = radians(end[0]), radians(end[-1])
